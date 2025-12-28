@@ -5,7 +5,19 @@ const cron = require('node-cron');
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const parser = new Parser();
+const express = require('express');
+const app = express();
 
+// A dummy page so the bot looks like a website
+app.get('/', (req, res) => {
+    res.send('Bot is running!');
+});
+
+// Render assigns a dynamic port, so we must use process.env.PORT
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
 // --- STATE ---
 const userPreferences = new Map();
 const selectionSession = new Map();
